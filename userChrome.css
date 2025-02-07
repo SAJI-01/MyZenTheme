@@ -1,0 +1,581 @@
+/*------------ UI FONT ------------*/
+* {
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 12px !important;
+  letter-spacing: 0.2px !important;
+}
+
+/* Integrated URL bar & webview */
+@media not (-moz-bool-pref:"zen.view.compact") {
+  #browser {
+    /* Ensure URL bar and nav bar adjustments when expanded */
+    &:has(#navigator-toolbox[zen-expanded="true"]) {
+      &:not(:has(.zen-split-view-splitter)) {
+
+        /* URL bar width and styling */
+        --urlbar-min-width: 28px !important;
+
+        #nav-bar {
+          --zen-toolbar-height: 36px;
+
+          /* Background color of URL Bar */
+          background-color: rgba(0, 0, 0, 0.01) !important; /* Semi-transparent dark color */
+
+          /* Border radius for a rounded URL bar */
+          border-radius: 10px 10px 0px 0px !important;
+
+          /* Padding and margins for spacing */
+          padding-left: 6px !important;
+          margin-right: 6px !important;
+          margin-top: 6px !important;
+          margin-left: 1px;
+        }
+
+        /* Styling for the browser container */
+        .browserContainer {
+          border-radius: 0px 0px 10px 10px !important;
+
+          /* Optional blur effect for certain states */
+          &:not([urlbar-exceeds-toolbar-bounds]) {
+            backdrop-filter: blur(10px) saturate(1.5);
+          }
+        }
+
+        /* Styling for the sidebar container */
+        .browserSidebarContainer {
+          background-color: rgba(0, 0, 0, 0.12) !important; /* Semi-transparent effect */
+        }
+      }
+    }
+  }
+}
+
+
+
+
+/* Hide extensions puzzle button and extension buttons unless hovered */
+#nav-bar:not(:has(*[open="true"])) {
+  #unified-extensions-button, .unified-extensions-item {
+    transition: opacity 0.25s !important;
+  }
+
+  &:not(:hover) {
+    #unified-extensions-button, .unified-extensions-item {
+      opacity: 0 !important;
+    }
+  }
+}
+
+#urlbar {
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+.browserSidebarContainer {
+  background-color: rgba(0, 0, 0, 0) !important; /* Browser Container transparency */
+}
+
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected]), .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected]) {
+  background-image: radial-gradient(circle, #ffffff78, #ffffff1c 2px, transparent 2px) !important;
+}
+
+/* Change the background color of the first pinned tab */
+.tabbrowser-tab[pinned]:nth-of-type(1) .tab-background {
+  background-color: rgba(255, 255, 255, 0.226) !important;
+  box-shadow: none !important;
+}
+
+/* Change the background color of the second pinned tab */
+.tabbrowser-tab[pinned]:nth-of-type(2) .tab-background {
+  background-color: rgba(255, 255, 255, 0.226) !important;
+  box-shadow: none !important;
+}
+
+.tabbrowser-tab[pinned] .tab-background {
+  border-top: 1px solid #ffffff1f !important;
+  border-bottom: 1px solid #0000001f !important;
+}
+
+#browser {
+
+  &:not(:has(.zen-split-view-splitter)) {
+    --urlbar-min-height: 28px !important;
+
+    #nav-bar {
+      --zen-toolbar-height: 36px;
+
+      margin-top: 6px !important;
+
+    }
+
+  }
+}
+
+#zen-workspaces-button {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: 0px 1px 10px rgba(0,0,0,0.1) !important;
+  border-radius: 8px !important;
+  border: 1px solid #ffffff0c !important;
+}
+
+
+#zen-workspaces-button {
+  .subviewbutton {
+    &[active="true"] {
+      background: rgba(255, 255, 255, 0.1) !important;
+      transition: 0.3s !important;
+      border: 1px solid #ffffff0a !important;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.062) !important;
+
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2) !important;
+      transition: 0.3s !important;
+    }
+
+    &:after {
+      display: none !important;
+    }
+
+  }
+}
+
+#zen-current-workspace-indicator {
+  padding: 10px calc(4px + var(--tab-inline-padding)) !important;
+  font-weight: 500 !important;
+}
+
+scrollbox:nth-child(5) {
+  scrollbar-width: none !important;
+}
+/* Pinned Tabs */
+#vertical-pinned-tabs-container {
+  scrollbar-width: none !important;
+}
+
+.browserContainer > findbar {
+  position: fixed;
+  bottom: 0px;
+  margin-bottom: var(--zen-element-separation);
+  margin-left: var(--zen-element-separation);
+  margin-right: var(--zen-element-separation);
+  background: var(--zen-colors-tertiary) !important;
+  border-radius: var(--zen-border-radius);
+  width: calc( 100% - var(--zen-element-separation) * 2);
+}
+
+.browserContainer > findbar,
+.findbar-textbox {
+  border: 1px solid var(--zen-colors-border) !important;
+}
+
+/* Increase space around edge of browser window and find bar */
+@media (-moz-bool-pref: "uc.floatingfindbar.increase.spacing") {
+  #main-window {
+    --zen-element-separation: 10px !important;
+  }
+}
+
+/* Enable compact findbar, similar to Smaller Compact Mode by n7itro */
+@media (-moz-bool-pref: "uc.floatingfindbar.compact.enabled") {
+  .browserContainer > findbar {
+    width: 75% !important;
+    margin-left: calc( 12.5% - var(--zen-element-separation) ) !important;
+  }
+}
+
+
+/* Animate new tab appear animation *//*Cool*/
+#vertical-pinned-tabs-container, #tabbrowser-arrowscrollbox {
+  .tabbrowser-tab {
+    animation: new-tab-appear 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+  }
+}
+
+/* The bit I found */
+.tabbrowser-tab .tab-background{
+  transition: background-color 0.3s ease;
+}
+/*------------------------------------------------*
+/* Add hover effect for URL bar */
+#urlbar:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important; /* Light background on hover */
+  transition: background-color 0.5s ease !important; /* Smooth transition */
+}
+
+/* Smooth transition for tab background colors */
+.tabbrowser-tab .tab-background {
+  transition: background-color 0.5s ease, border 0.5s ease; /* Increased duration for smoother effect */
+}
+
+/* Custom scrollbar style */
+scrollbox {
+  scrollbar-width: thin; /* Make scrollbar thinner */
+  scrollbar-color: rgba(100, 100, 100, 0.5) rgba(200, 200, 200, 0.2); /* Custom scrollbar colors */
+}
+
+/* Custom scrollbar for WebKit browsers */
+scrollbox::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+scrollbox::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.5); /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Rounded corners for the scrollbar thumb */
+}
+
+scrollbox::-webkit-scrollbar-track {
+  background: rgba(200, 200, 200, 0.2); /* Color of the scrollbar track */
+}
+
+/* Smooth transition for URL bar hover effect */
+#urlbar:hover {
+  background-color: rgba(255, 255, 255, 0.3) !important; /* Slightly darker background on hover */
+  transition: background-color 0.3s ease-in-out !important; /* Smooth transition */
+}
+
+/* Enhanced tab background transition */
+.tabbrowser-tab .tab-background {
+  transition: background-color 0.4s ease-in-out, border 0.4s ease-in-out; /* Smooth transition */
+}
+
+/* Add a subtle scale effect on tab hover */
+.tabbrowser-tab:hover .tab-background {
+  transform: scale(1.01); /* Slightly enlarge the tab on hover */
+  transition: transform 0.2s ease-in-out; /* Smooth transition */
+}
+
+/* Animate new tab appear animation with a bounce effect */
+#vertical-pinned-tabs-container, #tabbrowser-arrowscrollbox {
+  .tabbrowser-tab {
+    animation: new-tab-appear 0.4s cubic-bezier(0.25, 1.5, 0.5, 1) !important; /* Bounce effect */
+  }
+}
+
+/* Keyframes for bounce effect */
+@keyframes new-tab-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateY(4px);
+  }
+  80% {
+    transform: translateY(-2px); /* Bounce effect */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add a shadow effect to the URL bar */
+#urlbar {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important; /* Subtle shadow for depth */
+}
+
+/* Smooth transition for sidebar container */
+.browserSidebarContainer {
+  transition: background-color 0.3s ease-in-out; /* Smooth transition for background color */
+}
+
+/* Add hover effect for sidebar */
+.browserSidebarContainer:hover {
+  background-color: rgba(0, 0, 0, 0.15) !important; /* Darker background on hover */
+}
+
+/*________________________________*/
+
+/* Previous CSS remains the same */
+
+/* New Tab Spotlight Effect */
+.tabbrowser-tab:hover::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle,
+  rgba(255, 255, 255, 0.158) 0%,
+  rgba(255, 255, 255, 0.05) 30%,
+  transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+/* Active Tab Glow Effect */
+.tab-background[selected="true"] {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1) !important;
+  animation: tab-pulse 2s infinite ease-in-out;
+}
+
+@keyframes tab-pulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); }
+  50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.15); }
+}
+
+
+
+/* Tab Close Animation */
+.tab-close-button {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+  opacity 0.3s ease;
+}
+
+.tabbrowser-tab[pending] .tab-close-button {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+
+/* Workspace Button Hover State */
+#zen-workspaces-button {
+  position: relative;
+  overflow: hidden;
+}
+
+#zen-workspaces-button:hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+          to right,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+  );
+  transform: translateX(-100%);
+  animation: button-shine 0.8s ease-in-out infinite;
+}
+
+@keyframes button-shine {
+  to { transform: translateX(100%); }
+}
+
+
+
+/* Contextual New Tab Button */
+#new-tab-button {
+  position: relative;
+  overflow: hidden;
+}
+
+#new-tab-button:hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center,
+  rgba(255, 255, 255, 0.2) 0%,
+  transparent 70%
+  );
+  animation: new-tab-glow 0.5s ease-out;
+}
+
+@keyframes new-tab-glow {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(2); opacity: 1; }
+}
+
+/* Tab Loading Progress */
+.tabbrowser-tab[busy] .tab-background {
+  position: relative;
+  overflow: hidden;
+}
+
+.tabbrowser-tab[busy] .tab-background::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #00ffff66, #00ffffcc, #007e7e66);
+  animation: tab-progress 2s infinite ease-in-out;
+}
+
+@keyframes tab-progress {
+  0% { width: 0%; left: 0; }
+  50% { width: 100%; left: 0; }
+  100% { width: 0%; left: 100% }
+}
+
+/*------------ NORMAL TAB CUSTOMIZATION ------------*/
+
+/* A. General Customization */
+
+/* adjusting tab height */
+:root {
+  --tab-min-height: 34px !important;
+}
+.tab-content:not([pinned]) {
+  margin: 0px 0px 0px 1px !important;
+}
+.tabbrowser-tab:not([pinned]) .tab-background {
+  background-color: var(--tab-background-color, #f0f0f000) !important;
+  border: 2px solid var(--tab-border-color, #e0e0e028) !important;
+  border-left: 34px solid var(--tab-border-color, #e0e0e028) !important;
+  border-radius: 12px !important;
+  margin: 2px 2px !important; /* adjusting tab width */
+}
+
+.tabbrowser-tab:not([pinned]) {
+  &[selected] .tab-background {
+    background: color-mix(in srgb,var(--zen-colors-secondary) 45%,transparent) !important;
+    border: 3px solid rgba(255, 255, 255, 0.418) !important;
+  }
+}
+  
+
+
+/* text on general tab bar */
+.tab-text:not([pinned]) {
+  margin-top: 1px !important;
+  margin-left: 6px !important;
+  opacity: 100%;
+}
+
+/* reduce favicon sizes */
+.tab-icon-image:not([pinned]) {
+  width: 16px !important;
+  height: 16px !important;
+  margin-left: 1px !important;
+}
+
+/* ---------------- Essential Customization ---------------- */
+/* A. General Customization */
+#zen-essentials-container {
+  padding-top: 2px !important;
+  margin-bottom: 5px !important;
+  --tab-min-height: 38px !important;
+
+  .tabbrowser-tab[pinned] {
+    width: auto !important; /* Default width for pinned tabs */
+    height: auto !important;
+  }
+
+  .tab-content[pinned] {
+    height: auto !important;
+  }
+
+  .tabbrowser-tab[pinned] .tab-background {
+    height: auto !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    transition: background-color 0.3s ease; /* Smooth background transition */
+  }
+}
+
+/* B. Colouring Essentials */
+
+
+#zen-essentials-container .tabbrowser-tab[pinned]:nth-of-type(6n + 1) .tab-background {
+  /* Gmail color with neon animation and rounded borders */
+  background-color: #002fff5e !important;
+  border: 2px solid #4366ffa6 !important;
+  border-radius: 8px !important;
+}
+#zen-essentials-container .tabbrowser-tab[pinned]:nth-of-type(6n + 2) .tab-background {
+  /* YouTube Music color */
+  background-color: #ff000048 !important;
+  border: 2px solid #ff000069 !important;
+  border-radius: 8px !important;
+}
+#zen-essentials-container .tabbrowser-tab[pinned]:nth-of-type(6n + 3) .tab-background {
+  /* Disney+ color */
+  background-color: #100c63 !important;
+  border: 2px solid #1f3ba1 !important;
+  border-radius: 8px !important;
+}
+#zen-essentials-container .tabbrowser-tab[pinned]:nth-of-type(6n + 4) .tab-background {
+  /* Letterboxd color */
+  background-color: #202830a9 !important;
+  border: 2px solid #3f4f5f !important;
+  border-radius: 8px !important;
+}
+
+/* Increase icon size for pinned tabs */
+#zen-essentials-container .tabbrowser-tab[pinned] .tab-icon-image {
+  width: 21px !important; /* Increased icon width */
+  height: 21px !important; /* Increased icon height */
+}
+
+/* Add hover effect for essentials tabs */
+#zen-essentials-container .tabbrowser-tab[pinned]:hover .tab-background {
+  transform: scale(1.05); /* Slightly enlarge the tab on hover */
+  background-color: rgba(255, 255, 255, 0.1) !important; /* Lighten background on hover */
+}
+
+/* Active Tab Glow Effect */
+.tab-background[selected="true"] {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5) !important; /* Glow effect for active tab */
+  animation: tab-pulse 2s infinite ease-in-out; /* Pulsing effect */
+}
+
+@keyframes tab-pulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.7); }
+}
+
+
+/* ----------Window Control Buttons------------- */
+.titlebar-button {
+  background: transparent !important;
+  padding: 8px !important;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.titlebar-button:active {
+  transform: scale(0.9);
+}
+
+.titlebar-button > .toolbarbutton-icon {
+  background: rgba(255, 255, 255, 0.12) !important;
+  list-style-image: none !important;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0 6px;
+  width: 16px !important;
+  height: 16px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Minimize Button */
+.titlebar-min > .toolbarbutton-icon {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.titlebar-min:hover > .toolbarbutton-icon {
+  background: rgba(250, 197, 55, 0.9) !important;
+  box-shadow: 0 0 12px rgba(250, 197, 55, 0.4);
+}
+
+/* Maximize Button */
+.titlebar-max > .toolbarbutton-icon {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.titlebar-max:hover > .toolbarbutton-icon {
+  background: rgba(58, 234, 73, 0.9) !important;
+  box-shadow: 0 0 12px rgba(58, 234, 73, 0.4);
+}
+
+/* Close Button */
+.titlebar-close > .toolbarbutton-icon {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.titlebar-close:hover > .toolbarbutton-icon {
+  background: rgba(243, 79, 86, 0.9) !important;
+  box-shadow: 0 0 12px rgba(243, 79, 86, 0.4);
+}
+
